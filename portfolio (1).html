@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kayla Yi — Human Factors Engineer / UX Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EEF0EC;
+    --paper-panel: #E4E7E1;
+    --ink: #1C2229;
+    --ink-soft: #4B535C;
+    --ink-faint: #767E77;
+    --accent: #B9822C;
+    --accent-soft: #E7D8BC;
+    --slate: #33565F;
+    --line: #C7CCC4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Source Serif 4', Georgia, serif;
+    --max: 760px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--slate); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover{ color: var(--accent); }
+
+  /* ---- layout shell ---- */
+  .shell{
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  .rail{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    padding: 44px 28px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .rail-top .initials{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .rail-top .role{
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 20ch;
+  }
+  .rail nav{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .rail nav a{
+    font-family: var(--display);
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .rail nav a .tick{
+    width: 12px;
+    height: 1px;
+    background: var(--ink-faint);
+    display: inline-block;
+    transform: translateY(-3px);
+  }
+  .rail nav a:hover{ color: var(--accent); }
+  .rail nav a:hover .tick{ background: var(--accent); width: 18px; }
+  .rail-bottom{
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
+
+  main{ padding: 64px 56px 120px; }
+  section{ max-width: var(--max); margin: 0 0 96px; scroll-margin-top: 40px; }
+  section:last-of-type{ margin-bottom: 40px; }
+
+  h1{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(34px, 4vw, 46px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+  h2{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0 0 22px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h2 .idx{
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  h3{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0 0 4px;
+  }
+  p{ margin: 0 0 16px; color: var(--ink); }
+  .lede{
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+  .lede strong{ color: var(--ink); font-weight: 600; }
+
+  /* hero */
+  /* note / disclosure box */
+  .disclosure{
+    background: var(--paper-panel);
+    border-left: 2px solid var(--accent);
+    padding: 16px 20px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-top: 34px;
+  }
+  .disclosure p{ margin: 0; color: var(--ink-soft); }
+
+  /* method tags (BLUF chips on each case study) */
+  .method-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 20px;
+  }
+  .method-tags .tag{
+    font-family: var(--display);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--slate);
+    background: var(--paper-panel);
+    border: 1px solid var(--line);
+    padding: 5px 11px;
+    white-space: nowrap;
+  }
+
+  /* case studies */
+  .case{
+    border-top: 1px solid var(--line);
+    padding-top: 34px;
+  }
+  .case-tag{
+    font-family: var(--display);
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .case-context{
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    margin-bottom: 22px;
+  }
+  .case-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 28px;
+    margin: 22px 0 26px;
+  }
+  .case-field .label{
+    font-family: var(--display);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .case-field .val{ font-size: 15.5px; }
+
+  footer.contact{
+    max-width: var(--max);
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-links{
+    display:flex; gap: 22px; flex-wrap: wrap;
+    font-family: var(--display);
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 880px){
+    .shell{ grid-template-columns: 1fr; }
+    .rail{
+      position: relative;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+    }
+    .rail nav{ flex-direction: row; gap: 16px; margin-top: 0; flex-wrap: wrap; }
+    .rail-bottom{ display: none; }
+    main{ padding: 40px 24px 80px; }
+    .case-grid{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-top">
+      <div class="initials">Kayla Yi</div>
+      <div class="role">Human Factors Engineer &amp; UX Researcher</div>
+      <nav>
+        <a href="#about"><span class="tick"></span>About</a>
+        <a href="#work"><span class="tick"></span>Case studies</a>
+        <a href="#contact"><span class="tick"></span>Contact</a>
+      </nav>
+    </div>
+    <div class="rail-bottom">
+      Portfolio last updated<br>September 2026
+    </div>
+  </aside>
+
+  <main>
+
+    <section id="about">
+      <h1>Human factors research that moves from the console<br>to the roadmap.</h1>
+      <p class="lede">I'm a human factors engineer and UX researcher with <strong>4+ years</strong> leading end-to-end user research across <strong>safety-critical systems</strong>. I work across qualitative and quantitative methods and with cross-functional teams to translate real-world user insight into high-complexity systems people can operate safely and effectively.</p>
+
+      <div class="disclosure">
+        <p>Most of my work has been performed under sensitive contracts, and program-specific details are not publicly disclosable. The case studies below describe generalized problems, methods, and outcomes — program names, systems, and metrics have been abstracted or composited to protect sensitive information. Fuller detail is available in interviews, subject to appropriate clearance and need-to-know.</p>
+      </div>
+    </section>
+
+    <section id="work">
+      <h2><span class="idx">01</span>Case studies</h2>
+
+      <div class="case">
+        <div class="case-tag">Case study 1 — Interface research and design</div>
+        <h3>Designing a centralized status view for a safety-critical monitoring tool</h3>
+        <p class="case-context">A safety-critical monitoring tool used to track device output levels across a workspace. Users could check overall output but had no centralized way to monitor individual device status, identify threshold violations, or respond quickly.</p>
+
+        <div class="method-tags">
+          <span class="tag">Cognitive task analysis</span>
+          <span class="tag">SME interviews</span>
+          <span class="tag">Alert lifecycle modeling</span>
+          <span class="tag">Collaborative prototyping</span>
+          <span class="tag">Usability testing</span>
+          <span class="tag">Eye-tracking evaluation</span>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-field">
+            <div class="label">Research question</div>
+            <div class="val">How can users maintain situational awareness of all devices and outputs within a space — and how can their supervisors maintain awareness across all spaces?</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Method</div>
+            <div class="val">Cognitive task analysis and SME interviews to understand user decision-making around threshold violations; development of a device alert lifecycle model; collaborative prototyping with UX design; usability testing with representative users across iterations; eye-tracking evaluation to validate visual salience of active alerts.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Key insight</div>
+            <div class="val">Interviews revealed two distinct user types with different goals — an in-area user needing device-level specifics to resolve an issue, and a supervisor monitoring multiple areas who mainly needs to know if/when a threshold is crossed. The alert lifecycle model also surfaced that part of the resolution workflow happens outside the software entirely, a reminder to account for the environment around the product, not just the interface itself.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Impact</div>
+            <div class="val">After 4–5 design iterations, delivered a "device status board" mockup with interaction notes and design rationale, implemented in a subsequent software release with tailored views per user type (role-based access controls to automate that tailoring in progress). In continuous field use since early 2025, and has since prompted follow-on research into other safety-critical monitoring displays and cross-role status sharing among supervisors.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-tag">Case study 2 — Requirements &amp; acquisition input</div>
+        <h3>Evaluating a self-service software installation workflow</h3>
+        <p class="case-context">Long-term subcontractor support to a program transitioning from engineer-led, in-person software installations to a self-service model, intended to support a faster development tempo and reduce reliance on traveling systems engineers.</p>
+
+        <div class="method-tags">
+          <span class="tag">Document analysis</span>
+          <span class="tag">Workflow mapping</span>
+          <span class="tag">Contextual inquiry / field observation</span>
+          <span class="tag">Survey research</span>
+          <span class="tag">HSI reporting</span>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-field">
+            <div class="label">Research question</div>
+            <div class="val">Does the new installation method define a user-friendly workflow for retrieving, installing, and configuring the software and its auxiliary components — one that end users can complete without engineer support?</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Method</div>
+            <div class="val">Document analysis of the installation guide to map the intended workflow (steps, decisions, inputs, required resources); field observation of a live installation and training session, annotating deviations and troubleshooting; supplementary surveys capturing user demographics and ease-of-use feedback.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Key insight</div>
+            <div class="val">The documented process had gaps that engineers had to fill in real time, indicating typical users could not install independently as designed. Deeper analysis of the user population — high turnover, most users in-role under two years — surfaced a structural risk: single-admin access control meant the one person with install/config knowledge was likely to leave before transferring it.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Impact</div>
+            <div class="val">Delivered as an HSI report to program leadership (associate PM, lead engineer, lead trainer, product owner). Installation documentation was revised to close the gaps, and engineers began logging a shared troubleshooting reference now bundled into the install package. The turnover/knowledge-loss finding also prompted new, standardized post-install training requirements — now adopted program-wide.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-tag">Case study 3 — Role and permissions validation</div>
+        <h3>Validating user roles ahead of a new capability rollout</h3>
+        <p class="case-context">A planning and awareness tool with three unit-level user roles and one supervisory group-level role, undergoing program changes that would introduce new capabilities for the group-level user.</p>
+
+        <div class="method-tags">
+          <span class="tag">Documentation review</span>
+          <span class="tag">Permissions matrix development</span>
+          <span class="tag">Persona-based workflow mapping</span>
+          <span class="tag">User interviews</span>
+          <span class="tag">Interoperability analysis</span>
+          <span class="tag">Survey research</span>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-field">
+            <div class="label">Research question</div>
+            <div class="val">Are the existing permissions and capabilities sufficient to support the group-level user's tasking — including the capabilities planned for future releases?</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Method</div>
+            <div class="val">Documentation review to build a role/permissions matrix; persona-based workflow mapping against real-world processes; group-level user interviews validating current responsibilities and future capability plans; discussion of unit-group interoperability; surveys on perceived usability, utility, and satisfaction.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Key insight</div>
+            <div class="val">Existing permissions largely aligned with group-level needs, but no read-only role existed for users needing visibility without modification rights. More significantly, far less information flowed between unit- and group-level users than assumed: unit-level users track what/where/when within their area, while group-level users only need visibility when something goes wrong site-wide. The tool had been over-provisioning detail to group-level users, most of whom weren't using it — confirming the interface was unit-workflow-centric and underdeveloped for the group-level role.</div>
+          </div>
+          <div class="case-field">
+            <div class="label">Impact</div>
+            <div class="val">Recommendation to add a read-only role was accepted and adopted immediately. The broader finding reshaped the program roadmap to prioritize group-level needs going forward. The role/permissions matrix itself was embedded in the software as a reference and continues to be used in user engagements and training today.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="contact" id="contact">
+      <h2><span class="idx">02</span>Get in touch</h2>
+      <p class="lede">Open to conversations about human factors and UX research roles spanning both tactical execution and strategic influence.</p>
+      <div class="contact-links">
+        <a href="mailto:kayla.yi@gmail.com">kayla.yi@gmail.com</a>
+        <a href="https://linkedin.com/in/kayla.yi">LinkedIn</a>
+        <a href="Kayla_Yi.pdf">Resume (PDF)</a>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
